@@ -18,7 +18,7 @@ const ModuleComponent = () => {
   console.log("Re-rendered!");
   
   function addModule(module) {
-    var newModules = [].concat(modules);
+    let newModules = [].concat(modules);
     newModules.push(module);
     setModules(newModules);
     console.log(modules);
@@ -43,7 +43,7 @@ const ModuleComponent = () => {
 
 const Module = ({ goalName, goalDescription, completion }) => {
   return (
-    <div className="module-div">
+    <a href="/goals" className="module-link">
       <div className="module-header">
         <h1>{goalName}</h1>
       </div>
@@ -52,7 +52,7 @@ const Module = ({ goalName, goalDescription, completion }) => {
         <p>Description:</p>
         <p>{goalDescription}</p>
       </div>
-    </div>
+    </a>
   );
 };
 

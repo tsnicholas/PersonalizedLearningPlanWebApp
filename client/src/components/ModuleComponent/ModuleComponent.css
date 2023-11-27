@@ -1,4 +1,4 @@
-.module-div{
+.module-link{
     border: 1px solid black;
     width: 300px;
     height: 500px;
@@ -10,8 +10,11 @@
     transition-property: transform;
     box-shadow: 0 2px 5px rgba(0,0,0,.3);
     border-radius: 4px;
+    text-decoration: none;
+    color: black;
 }
-.module-div:hover {
+
+.module-link:hover {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     box-shadow: 0 4px 10px rgba(0,0,0,.35);

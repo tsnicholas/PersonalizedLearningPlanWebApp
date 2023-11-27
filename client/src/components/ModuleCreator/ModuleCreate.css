@@ -17,9 +17,10 @@
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
   box-shadow: 0 4px 10px rgba(0,0,0,.35);
+
 }
 
-button.fill-div{
+button .fill-div{
   background-color: transparent;
   border: none;
   display: block;
@@ -29,6 +30,7 @@ button.fill-div{
   display: flex; 
   align-items: center;
   justify-content: center;
+  cursor:pointer;
 }
 
 .center {
