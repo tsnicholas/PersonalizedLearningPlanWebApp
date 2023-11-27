@@ -5,10 +5,10 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-import LearningPlan from "./screens/LearningPlan";
+import LearningPlan from "./screens/LearningPlan/LearningPlan";
 import LoginScreen from "./screens/login/login";
 import Register from "./screens/register/Register"
-import DefaultScreen from "./screens/Default";
+import DefaultScreen from "./screens/Default/DefaultContainer";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
           <Route path="/LearningPlan" element={<LearningPlan />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<Register />} />
+          
         </Route>
       </Routes>
     </Router>

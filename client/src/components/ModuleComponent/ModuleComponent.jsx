@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ModuleCreator from "../ModuleCreator";
+import ModuleCreator from "../ModuleCreator/ModuleCreator";
 import { genID } from "../../utils/rng";
 import "./ModuleComponent.css";
 

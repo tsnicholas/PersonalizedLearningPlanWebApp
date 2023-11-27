@@ -1,5 +1,5 @@
 import React from "react";
-import ModuleComponent from "../../components/ModuleComponent/";
+import ModuleComponent from "../../components/ModuleComponent/ModuleComponent";
 
 function Dashboard(){
   return (
