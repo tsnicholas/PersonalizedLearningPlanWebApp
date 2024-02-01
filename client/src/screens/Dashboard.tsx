@@ -82,7 +82,7 @@ function DashboardScreen() {
   }
   return (
     <div className={`w-[100vw] ${STYLE.flexRow} justify-center items-center py-[10px] my-[20px] mx-[10px] ${STYLE.defaultGap}`}>
-      <div className={`h-[90vh] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexRow} items-top m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
+      <div className={`h-[90vh] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexColumn} items-top m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
         <img src={profilePicture} alt="pfp here" className="h-[10vh] w-[5vw] rounded-full"/>
             <div className={`w-[100vw] ${STYLE.flexColumn} justify-left items-top py-[10px] my-[20px] mx-[10px] ${STYLE.defaultGap}`}>
                 <p className="text-[30px] mb-[10px]">Name: {profileState.firstName} {profileState.lastName}</p>
