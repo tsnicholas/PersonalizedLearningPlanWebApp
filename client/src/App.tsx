@@ -11,6 +11,7 @@ import Register from "./screens/Register";
 import DefaultScreen from "./screens/DefaultContainer";
 import Goals from "./screens/Goals";
 import ProfileScreen from "./screens/Profile";
+import DashboardScreen from "./screens/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 
@@ -26,6 +27,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/LearningPlan" element={<LearningPlan />} />
                 <Route path="/profile" element={<ProfileScreen />} />
+                <Route path="/dashboard" element={<DashboardScreen />} />
                 <Route path="/goals/:id" element={<Goals />} />
               </Route>
               <Route path="/login" element={<LoginScreen />} />
