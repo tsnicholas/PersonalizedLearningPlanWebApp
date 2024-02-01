@@ -120,7 +120,7 @@ function DashboardScreen() {
   }
   return (
     <div className={`w-[100vw] ${STYLE.flexRow} justify-center items-center py-[10px] my-[20px] mx-[10px] ${STYLE.defaultGap}`}>
-      <div className={`h-[90vh] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexRow} items-center m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
+      <div className={`h-[90vh] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexRow} items-top m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
         <img src={profilePicture} alt="pfp here" className="h-[10vh] w-[5vw] rounded-full"/>
         {editMode ? (
           <input
@@ -225,25 +225,6 @@ function DashboardScreen() {
           </div>
         </div>
       )}
-      <div className={`${STYLE.flexColumn} ${STYLE.defaultGap}`}>
-        {editMode ? (
-          <button className={BUTTON_STYLE} onClick={saveChanges}>
-            Confirm
-          </button>
-        ) : (
-          <button
-            className={BUTTON_STYLE}
-            onClick={() => {
-              setEditMode(true);
-            }}
-          >
-            Edit Profile
-          </button>
-        )}
-        <button className={BUTTON_STYLE} onClick={deleteAccount}>
-          Delete Account
-        </button>
-      </div>
     </div>
   );
 }
