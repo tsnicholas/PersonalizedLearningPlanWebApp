@@ -32,7 +32,10 @@ const NavBar = () => {
             </Link>
           </li>
           <li className="inline-block relative after:block after:m-auto after:h-1 after:w-0 after:bg-transparent after:content-[''] after:transition-width after:duration-500 after:ease-in-out  hover:after:w-full hover:after:bg-element-base">
-            <Link to="/#" className="w-full text-black hover:text-element-base">
+            <Link 
+              to="/dashboard" 
+              className="w-full text-black hover:text-element-base"
+            >
               {" "}
               Dashboard
             </Link>
