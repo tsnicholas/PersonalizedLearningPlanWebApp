@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { ApiClient } from "../hooks/ApiClient";
+import React, { useEffect, useReducer } from "react";
 import profilePicture from "../resources/Default_Profile_Picture.jpg";
 import useProfile from "../hooks/useProfile";
-import { useHotKeys } from "../hooks/useHotKeys";
 import { emptyProfile, Profile } from "../types";
 
 interface ProfileActionProps {
@@ -58,10 +56,7 @@ function updateProfile(profile : Profile, action : ProfileActionProps): Profile 
 
 function DashboardScreen() {
   const [profileState, dispatch] = useReducer(updateProfile, emptyProfile);
-  const [editMode, setEditMode] = useState(false);
-  const { put } = ApiClient();
   const { data: profileData, isLoading, error } = useProfile();
-  const { handleEnterPress } = useHotKeys();
 
   useEffect(() => {
     console.log("re-rendered...");
@@ -78,22 +73,6 @@ function DashboardScreen() {
     }
   }, [profileData, isLoading, error]);
 
-  async function saveChanges() {
-    try {
-      await put(`/profile/edit/${profileState.id}`, {
-        username: profileState.username,
-        firstName: profileState.firstName,
-        lastName: profileState.lastName,
-        profilePicture: profileState.profilePicture,
-        jobTitle: profileState.jobTitle,
-        bio: profileState.bio,
-      });
-      setEditMode(false);
-    } catch (error: any) {
-      console.error(error);
-      alert(error.message ? error.message : error);
-    }
-  }
   if (isLoading) {
     return <div>This is loading...</div>
   }
@@ -105,94 +84,18 @@ function DashboardScreen() {
     <div className={`w-[100vw] ${STYLE.flexRow} justify-center items-center py-[10px] my-[20px] mx-[10px] ${STYLE.defaultGap}`}>
       <div className={`h-[90vh] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexRow} items-top m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
         <img src={profilePicture} alt="pfp here" className="h-[10vh] w-[5vw] rounded-full"/>
-          <p className="text-[30px] mb-[10px]">{profileState.firstName}</p>
+            <div className={`w-[100vw] ${STYLE.flexColumn} justify-left items-top py-[10px] my-[20px] mx-[10px] ${STYLE.defaultGap}`}>
+                <p className="text-[30px] mb-[10px]">Name: {profileState.firstName} {profileState.lastName}</p>
+                <p className="text-[30px] mb-[10px]">Company:</p>
+                <p className="text-[30px] mb-[10px]">Title: {profileState.jobTitle}</p>
+                <p className="text-[30px] mb-[10px]">Bio: {profileState.bio}</p>
+            </div>
       </div>
-      {editMode ? (
-        <div className={INFORMATION_CONTAINER_STYLE}>
-          <div className={TEXT_ENTRY_STYLE}>
-            <label htmlFor="firstName">First name:</label>
-            <input
-              className={`${STYLE.borderValues}`}
-              id="firstName"
-              name="profile"
-              type="text"
-              placeholder="First Name"
-              value={profileState.firstName}
-              defaultValue={profileState.firstName}
-              onKeyUp={(event) => {handleEnterPress(event, saveChanges)}}
-              onChange={(event) => {
-                dispatch({variable: PROFILE_VARIABLES.firstName, input: event.target.value});
-              }}
-            />
-          </div>
-          <div className={TEXT_ENTRY_STYLE}>
-            <label htmlFor="lastName">Last name:</label>
-            <input
-              className={`${STYLE.borderValues}`}
-              id="lastName"
-              name="profile"
-              type="text"
-              placeholder="Last Name"
-              value={profileState.lastName}
-              defaultValue={profileState.lastName}
-              onKeyUp={(event) => {handleEnterPress(event, saveChanges)}}
-              onChange={(event) => {
-                dispatch({variable: PROFILE_VARIABLES.lastName, input: event.target.value});
-              }}
-            />
-          </div>
-          <div className={TEXT_ENTRY_STYLE}>
-            <label htmlFor="jobTitle">Job title:</label>
-            <input
-              className={`${STYLE.borderValues}`}
-              id="jobTitle"
-              name="profile"
-              type="text"
-              placeholder="Job Title"
-              value={profileState.jobTitle}
-              defaultValue={profileState.jobTitle}
-              onKeyUp={(event) => {handleEnterPress(event, saveChanges)}}
-              onChange={(event) => {
-                dispatch({variable: PROFILE_VARIABLES.jobTitle, input: event.target.value});
-              }}
-            />
-          </div>
-          <p>About Me:</p>
-          <input
-            id="bio"
-            name="profile"
-            type="textarea"
-            placeholder="bio"
-            value={profileState.bio}
-            defaultValue={profileState.bio}
-            onKeyUp={(event) => {handleEnterPress(event, saveChanges)}}
-            onChange={(event) => {
-              dispatch({variable: PROFILE_VARIABLES.bio, input: event.target.value});
-            }}
-            className={`${STYLE.aboutMeSize} px-[8px] text-[16px] ${STYLE.borderValues}`}
-          />
-        </div>
-      ) : (
-        <div className={INFORMATION_CONTAINER_STYLE}>
-          <div className={VARIABLE_DISPLAY_STYLE}>
-            <p>First name:</p> 
-            <p>{profileState.firstName ? profileState.firstName : ""}</p>
-          </div>  
-          <div className={VARIABLE_DISPLAY_STYLE}>
-            <p>Last name:</p>
-            <p>{profileState.lastName ? profileState.lastName : ""}</p>
-          </div>
-          <div className={VARIABLE_DISPLAY_STYLE}>
-            <p>Job title:</p> 
-            <p>{profileState.jobTitle ? profileState.jobTitle : ""}</p>
-          </div>
-          <p>About Me:</p>
-          <br />
-          <div className={`${STYLE.aboutMeSize}`}>
-            <p>{profileState.bio ? profileState.bio : ""}</p>
-          </div>
-        </div>
-      )}
+      <div className={`h-[90vh] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexColumn} items-center m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
+
+        <p className="text-[30px] mb-[10px]">{profileState.firstName} {profileState.lastName}</p>
+        <p className="text-[30px] mb-[10px]">{profileState.firstName} {profileState.lastName}</p>
+      </div>
     </div>
   );
 }
