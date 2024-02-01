@@ -13,11 +13,12 @@ interface ProfileActionProps {
 }
 
 const STYLE = {
-  containerHeight: "h-[50vh]",
-  containerWidth: "w-[30vw]",
+  containerHeight: "h-[90vh]",
+  containerWidth: "w-[40vw]",
   aboutMeSize: "h-[25vh] w-[28vw]",
   borderValues: "border-[0.8px] border-solid border-[rgb(219, 219, 219)]",
   defaultGap: "gap-[5px]",
+  flexRow: "flex flex-row",
   flexColumn: "flex flex-col"
 }
 
@@ -118,8 +119,8 @@ function DashboardScreen() {
     return <div>This is an error</div>
   }
   return (
-    <div className={`h-[90vh] ${STYLE.flexColumn} justify-center items-center py-[10px] my-[20px] mx-[10px] ${STYLE.defaultGap}`}>
-      <div className={`h-[calc(${STYLE.containerHeight} - 15)] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexColumn} items-center m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
+    <div className={`w-[100vw] ${STYLE.flexRow} justify-center items-center py-[10px] my-[20px] mx-[10px] ${STYLE.defaultGap}`}>
+      <div className={`h-[90vh] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexRow} items-center m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
         <img src={profilePicture} alt="pfp here" className="h-[10vh] w-[5vw] rounded-full"/>
         {editMode ? (
           <input
