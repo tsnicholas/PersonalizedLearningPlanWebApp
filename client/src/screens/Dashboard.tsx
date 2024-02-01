@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../hooks/useUser";
 import { ApiClient } from "../hooks/ApiClient";
 import profilePicture from "../resources/Default_Profile_Picture.jpg";
 import useProfile from "../hooks/useProfile";
@@ -25,7 +23,6 @@ const STYLE = {
 const INFORMATION_CONTAINER_STYLE = `${STYLE.containerHeight} ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexColumn} justify-around content-normal p-[10px] mx-[40px] mt-[24px] ${STYLE.defaultGap} text-[24px]`;
 const TEXT_ENTRY_STYLE = `flex flex-row ${STYLE.defaultGap} justify-between`;
 const VARIABLE_DISPLAY_STYLE = `flex flex-row ${STYLE.defaultGap} justify-between text-start`;
-const BUTTON_STYLE = `h-[40px] ${STYLE.borderValues} rounded px-[8px] text-[16px] bg-[#8C1515] text-white`
 
 const PROFILE_VARIABLES = {
   username: "username",
@@ -62,9 +59,7 @@ function updateProfile(profile : Profile, action : ProfileActionProps): Profile 
 function DashboardScreen() {
   const [profileState, dispatch] = useReducer(updateProfile, emptyProfile);
   const [editMode, setEditMode] = useState(false);
-  const navigate = useNavigate();
-  const { user, removeUser } = useUser();
-  const { put, del } = ApiClient();
+  const { put } = ApiClient();
   const { data: profileData, isLoading, error } = useProfile();
   const { handleEnterPress } = useHotKeys();
 
@@ -99,18 +94,6 @@ function DashboardScreen() {
       alert(error.message ? error.message : error);
     }
   }
-
-  async function deleteAccount() {
-    try {
-      await del(`/profile/delete/${profileState.id}`);
-      await del(`/auth/delete/${user.email}`);
-      removeUser();
-      navigate("/#");
-    } catch (error: any) {
-      console.error(error);
-      alert(error.response ? error.response : error);
-    }
-  }
   if (isLoading) {
     return <div>This is loading...</div>
   }
@@ -122,22 +105,7 @@ function DashboardScreen() {
     <div className={`w-[100vw] ${STYLE.flexRow} justify-center items-center py-[10px] my-[20px] mx-[10px] ${STYLE.defaultGap}`}>
       <div className={`h-[90vh] ${STYLE.containerWidth} ${STYLE.borderValues} ${STYLE.flexRow} items-top m-[10px] py-[25px] px-[10px] ${STYLE.defaultGap}`}>
         <img src={profilePicture} alt="pfp here" className="h-[10vh] w-[5vw] rounded-full"/>
-        {editMode ? (
-          <input
-            id="username"
-            name="profile"
-            type="text"
-            placeholder="username"
-            value={profileState.username}
-            defaultValue={profileState.username}
-            onKeyUp={(event) => {handleEnterPress(event, saveChanges)}}
-            onChange={(event) => {
-              dispatch({variable: PROFILE_VARIABLES.username, input: event.target.value});
-            }}
-          />
-        ) : (
-          <p className="text-[30px] mb-[10px]">{profileState.username}</p>
-        )}
+          <p className="text-[30px] mb-[10px]">{profileState.firstName}</p>
       </div>
       {editMode ? (
         <div className={INFORMATION_CONTAINER_STYLE}>
